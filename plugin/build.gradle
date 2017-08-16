@@ -1,0 +1,35 @@
+group "com.test"
+version "1.0-SNAPSHOT"
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile gradleApi()
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src/main/groovy']
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+//  include other gradle files
+apply from: "greeting.gradle"
